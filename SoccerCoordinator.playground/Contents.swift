@@ -96,7 +96,7 @@ var differenceAverageHeighetDragonAndSharks: Float = thresholdOfHeight + 1
 var differenceAverageHeighetDragonAndRaptors: Float = thresholdOfHeight + 1
 var differenceAverageHeighetSharksAndRaptors: Float = thresholdOfHeight + 1
 
-if divisorOfExperiencedPlayers == 0{ print("The number of experienced player is not divisible by the number of team: ",numberOfTeam)}
+if divisorOfExperiencedPlayers == 0{ print("The number of experienced players is not divisible by the number of team which is \(numberOfTeam)" + "/n Consider to add experienced players a multiple of \(numberOfTeam)")}
 else {
  
      // creating difference average values of the function
@@ -208,7 +208,7 @@ var dictionaryForTeam  = [0: teamDragon,1:teamSharks,2:teamRaptors]
 for index in 0..<numberOfTeam{
     var temporaryIndividualName = dictionaryForTeam[index]!
     // sorry for this, i am aware of the Optional type (to a very minimum extent!), although it hasn't been covered by the lecture so far. 
-    // so i have to unwrap it. I know this might result in crash. Again, i don't know to what extent it will crash
+    // so i have to unwrap it for now.
     var temporaryGuardianName = returningGuardianOfTeam(temporaryIndividualName)
     
     var teamPracticeDatesLiteral = ""
