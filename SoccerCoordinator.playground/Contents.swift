@@ -49,66 +49,7 @@ for index in 0..<numberOfData {
     }
 }
 
-var teamDragon = [String]()
-var teamSharks = [String]()
-var teamRaptors = [String]()
-let numberOfTeam = 3 // this is an input
-
-//creating a divisor so that the number
-let divisorOfExperiencedPlayers = countingExperiencedPlayer/numberOfTeam
-
-
-if divisorOfExperiencedPlayers == 0{ print("The number of experienced player is not divisible by the number of team: ",numberOfTeam)}
-else {
-     
-    /// putting the experienced players randomly
-    while storingExperiencedPlayers.count != 0 {
-        var pickingThePlayerFromRecord = storingExperiencedPlayers[0]//picking always the first index
-        
-        var countingRandomPick = Int(arc4random() % uint(numberOfTeam) + 1)
-        if ((countingRandomPick == 1) && (teamDragon.count < divisorOfExperiencedPlayers) ){
-            teamDragon.append(pickingThePlayerFromRecord)
-            storingExperiencedPlayers.removeAtIndex(0)//deleting always the first index after restoring it
-        }
-        else if  ((countingRandomPick == 2 ) && (teamSharks.count < divisorOfExperiencedPlayers)) {
-            teamSharks.append(pickingThePlayerFromRecord)
-            storingExperiencedPlayers.removeAtIndex(0)//deleting always the first index after restoring it
-        }
-        else if ((countingRandomPick == 3) && (teamRaptors
-            .count < divisorOfExperiencedPlayers)){
-            teamRaptors.append(pickingThePlayerFromRecord)
-            storingExperiencedPlayers.removeAtIndex(0)//deleting always the first index after restoring it
-        }
-        //storingExperiencedPlayers.removeAtIndex(0) is put at every branch so that the while loop can search until a number of iterations so that every team is filled equally
-        
-    }// end of putting the experienced players randomly
-    teamRaptors
-    var countingRandomPick = Int(arc4random() % uint(numberOfTeam) + 1)
-    
-    let divisorOfNonExperiencedPlayers = countingNonExperiencedPlayer/numberOfTeam
-    
-    while storingNonExperiencedPlayers.count != 0 {
-        
-        var pickingThePlayerFromRecord = storingNonExperiencedPlayers[0]
-        
-        var countingRandomPick = Int(arc4random() % uint(numberOfTeam) + 1)
-        
-        if((countingRandomPick == 1) && (teamDragon.count <= teamDragon.count + divisorOfNonExperiencedPlayers)){
-            teamDragon.append(pickingThePlayerFromRecord)
-            storingNonExperiencedPlayers.removeAtIndex(0)
-        }else if((countingRandomPick == 2) && (teamSharks.count <= teamSharks.count + divisorOfNonExperiencedPlayers)){
-            teamSharks.append(pickingThePlayerFromRecord)
-            storingNonExperiencedPlayers.removeAtIndex(0)
-        }else if((countingRandomPick == 3) && (teamRaptors.count <= teamRaptors.count + divisorOfNonExperiencedPlayers)){
-            teamRaptors.append(pickingThePlayerFromRecord)
-            storingNonExperiencedPlayers.removeAtIndex(0)
-        }
-        
-        
-    }
-
- }
-
+// function of average of team's heights
 
 func returningAverageHeightOfTeam(nameOfTeam: [String])-> Float{
     var heightOfIndividual = [Int]()
@@ -133,9 +74,72 @@ func returningAverageHeightOfTeam(nameOfTeam: [String])-> Float{
     }
     
     return accumulatingValues / Float(heightOfIndividual.count)
-}
+}// end of function
 
 
-returningAverageHeightOfTeam(teamDragon)
-returningAverageHeightOfTeam(teamSharks)
-returningAverageHeightOfTeam(teamRaptors)
+// Defining variables of teams, number of team and constant ot Threshold
+var teamDragon = [String]()
+var teamSharks = [String]()
+var teamRaptors = [String]()
+let numberOfTeam = 3 // this is an input
+let thresholdOfHeight: Float = 1.5
+
+//creating a divisor so that the division will be evenly distributed
+let divisorOfExperiencedPlayers = countingExperiencedPlayer/numberOfTeam
+
+//initializing the threshold logic variables, initializing them higher then the threshold
+var differenceAverageHeighetDragonAndSharks: Float = thresholdOfHeight + 1
+var differenceAverageHeighetDragonAndRaptors: Float = thresholdOfHeight + 1
+var differenceAverageHeighetSharksAndRaptors: Float = thresholdOfHeight + 1
+
+if divisorOfExperiencedPlayers == 0{ print("The number of experienced player is not divisible by the number of team: ",numberOfTeam)}
+else {
+ 
+     // creating difference average values of the function
+     //starting to make it higher than the threshold first until it is violated (i.e., to make it lower than the threshold)
+    
+     
+    while ((differenceAverageHeighetDragonAndSharks > thresholdOfHeight) || (differenceAverageHeighetDragonAndRaptors > thresholdOfHeight) || (differenceAverageHeighetSharksAndRaptors > thresholdOfHeight)){
+        /// putting the experienced players randomly
+        for indexAgain in 0..<storingExperiencedPlayers.count {
+            var pickingThePlayerFromRecord = storingExperiencedPlayers[indexAgain]//picking always the first index
+            
+            var countingRandomPick = Int(arc4random() % uint(numberOfTeam) + 1)
+            if ((countingRandomPick == 1) && (teamDragon.count < divisorOfExperiencedPlayers) ){
+                teamDragon.append(pickingThePlayerFromRecord)//deleting always the first index after restoring it
+            }
+            else if  ((countingRandomPick == 2 ) && (teamSharks.count < divisorOfExperiencedPlayers)) {
+                teamSharks.append(pickingThePlayerFromRecord)//deleting always the first index after restoring it
+            }
+            else if ((countingRandomPick == 3) && (teamRaptors
+                .count < divisorOfExperiencedPlayers)){
+                teamRaptors.append(pickingThePlayerFromRecord)//deleting always the first index after restoring it
+            }
+            
+        }// end of putting the experienced players randomly
+        teamRaptors
+        
+        let divisorOfNonExperiencedPlayers = countingNonExperiencedPlayer/numberOfTeam
+        
+         for indexAgain in 0..<storingNonExperiencedPlayers.count {
+            
+            var pickingThePlayerFromRecord = storingNonExperiencedPlayers[indexAgain]
+            
+            var countingRandomPick = Int(arc4random() % uint(numberOfTeam) + 1)
+            
+            if((countingRandomPick == 1) && (teamDragon.count <= teamDragon.count + divisorOfNonExperiencedPlayers)){
+                teamDragon.append(pickingThePlayerFromRecord)
+            }else if((countingRandomPick == 2) && (teamSharks.count <= teamSharks.count + divisorOfNonExperiencedPlayers)){
+                teamSharks.append(pickingThePlayerFromRecord)
+            }else if((countingRandomPick == 3) && (teamRaptors.count <= teamRaptors.count + divisorOfNonExperiencedPlayers)){
+                teamRaptors.append(pickingThePlayerFromRecord)
+            }
+            
+        }
+        
+        differenceAverageHeighetDragonAndSharks = (abs((returningAverageHeightOfTeam(teamDragon) - returningAverageHeightOfTeam(teamSharks))))
+        differenceAverageHeighetDragonAndRaptors = abs(returningAverageHeightOfTeam(teamDragon) - returningAverageHeightOfTeam(teamRaptors))
+        differenceAverageHeighetSharksAndRaptors = abs(returningAverageHeightOfTeam(teamSharks) - returningAverageHeightOfTeam(teamRaptors))
+        
+        }// end of threshold logic
+   }
