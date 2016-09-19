@@ -1,232 +1,181 @@
 //: Playground - noun: a place where people can play
-import Darwin
-var nameRecord = ["Joe Smith","Jill Tanner","Bill Bon","Eva Gordon","Matt Gill","Kimmy Stein","Sammy Adams","Karl Saygan","Suzane Greenberg","Sal Dali","Joe Kavalier","Ben Finkelstein","Diego Soto","Chloe Alaska","Arnold Willis","Phillip Helm","Les Clay","Herschel Krustofski"]
-var heightRecord = [42,36,43,45,40,41,45,42,44,41,39,44,41,47,43,44,42,45]
-
-var soccerExperienceRecord  = [ true, true,true, false, false, false, false, true, true, false, false, false,true,false,false,true,true,true]
-var guardianNameRecord = ["Jim and Jan Smith","Clara Tanner","Sara and Jenny Bon","Wendy and Mike Gordon","Charles and Sylvia Gill","Bill and Hillary Stein","Jeff Adams","Heather Bledsoe","Henrietta Dumas","Gala Dali","Sam and Elaine Kavalier","Aaron and Jill Finkelstein","Robin and Sarika Soto","David and Jamie Alaska","Claire Willis","Thomas Helm and Eva Jones","Wynonna Brown","Hyman and Rachel Krustofski"]
-
-let numberOfData = nameRecord.count//checking the number of inputs for name
-heightRecord.count//checking for height
-soccerExperienceRecord.count//checking for soccerExperienceRecord
-guardianNameRecord.count//checking for guardianNameRecord
 
 
-func returningSoccerExperience(playerName: String)-> Bool{
-    var nameMatch = ""
-    var indexRecordForFunction = 0
-    for index in 0..<numberOfData{
-        if playerName == nameRecord[index]{
-             nameMatch  = playerName
-             indexRecordForFunction = index
-        }
-    }
-    switch playerName{
-    case nameMatch : return soccerExperienceRecord[indexRecordForFunction]
-    default : return false// the return is ambiguous here..
-    }
-}// end of function
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+// First, creating the Dictionary collection for all 
+//players,upon correcting from previous submission
+////////////////////////////////////////////////////////
+let player1: [String: Any] = ["playerName":"Joe Smith","heightInInches":42,"hasPlayedBefore":true,"guardianNames":"Jim and Jan Smith"]
+let player2: [String: Any] = ["playerName":"Jill Tanner","heightInInches":36,"hasPlayedBefore":true,"guardianNames":"Clara Tanner"]
+let player3: [String: Any] = ["playerName":"Bill Bon","heightInInches":43,"hasPlayedBefore":true,"guardianNames":"Sara and Jenny Bon"]
+let player4: [String: Any] = ["playerName":"Eva Gordon","heightInInches":45,"hasPlayedBefore":false,"guardianNames":"Wendy and Mike Gordon"]
+let player5: [String: Any] = ["playerName":"Matt Gill","heightInInches":40,"hasPlayedBefore":false,"guardianNames":"Charles and Sylvia Gill"]
+let player6: [String: Any] = ["playerName":"Kimmy Stein","heightInInches":41,"hasPlayedBefore":false,"guardianNames":"Bill and Hillary Stein"]
+let player7: [String: Any] = ["playerName":"Sammy Adams","heightInInches":45,"hasPlayedBefore":false,"guardianNames":"Jeff Adams"]
+let player8: [String: Any] = ["playerName":"Karl Saygan","heightInInches":42,"hasPlayedBefore":true,"guardianNames":"Heather Bledsoe"]
+let player9: [String: Any] = ["playerName":"Suzane Greenberg","heightInInches":44,"hasPlayedBefore":true,"guardianNames":"Henrietta Dumas"]
+let player10: [String: Any] = ["playerName":"Sal Dali","heightInInches":41,"hasPlayedBefore":false,"guardianNames":"Gala Dali"]
+let player11: [String: Any] = ["playerName":"Joe Kavalier","heightInInches":39,"hasPlayedBefore":false,"guardianNames":"Sam and Elaine Kavalier"]
+let player12: [String: Any] = ["playerName":"Ben Finkelstein","heightInInches":44,"hasPlayedBefore":false,"guardianNames":"Aaron and Jill Finkelstein"]
+let player13: [String: Any] = ["playerName":"Diego Soto","heightInInches":41,"hasPlayedBefore":true,"guardianNames":"Robin and Sarika Soto"]
+let player14: [String: Any] = ["playerName":"Chloe Alaska","heightInInches":47,"hasPlayedBefore":false,"guardianNames":"David and Jamie Alaska"]
+let player15: [String: Any] = ["playerName":"Arnold Willis","heightInInches":43,"hasPlayedBefore":false,"guardianNames":"Claire Willis"]
+let player16: [String: Any] = ["playerName":"Phillip Helm","heightInInches":44,"hasPlayedBefore":true,"guardianNames":"Thomas Helm and Eva Jones"]
+let player17: [String: Any] = ["playerName":"Les Clay","heightInInches":42,"hasPlayedBefore":true,"guardianNames":"Wynonna Brown"]
+let player18: [String: Any] = ["playerName":"Herschel Krustofski","heightInInches":45,"hasPlayedBefore":true,"guardianNames":"Hyman and Rachel Krustofski"]
 
-returningSoccerExperience("Eva Gordon")//testing
+var theLeague:[[String:Any]] = [player1,player2,player3,player4,player5,player6,player7,player8,player9,player10,player11,player12,player13,player14,player15,player16,player17,player18]
 
-////////////////////////////////////////////
-/////////Assigning to Team//////////////////
-///////////////////////////////////////////
+// Defining the variables and constants
+var teamDragons = [[String:Any]]()
+var teamSharks = [[String:Any]]()
+var teamRaptors = [[String:Any]]()
+let numberOfTeam = 3
 
-//Counting and Assigning Experienced players and Assigning Non-Experienced Players to different arrays
-var countingExperiencedPlayer = 0
-var countingNonExperiencedPlayer = 0
-var storingExperiencedPlayers = [String]()
-var storingNonExperiencedPlayers = [String]()
-for index in 0..<numberOfData {
+var experiencedPlayers = [[String:Any]]()
+var nonExperiencedPlayers =  [[String:Any]]()
+let numberOfPlayersPerTeam = theLeague.count / numberOfTeam
+
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+// Assigning the experienced and non experienced
+////////////////////////////////////////////////////////
+
+for player in theLeague {
     
-    if returningSoccerExperience(nameRecord[index]) == true {
-        countingExperiencedPlayer += 1
-        storingExperiencedPlayers.append(nameRecord[index])
+    let withExperienced = player["hasPlayedBefore"] as! Bool
+
+    if withExperienced == true {
+        experiencedPlayers.append(player)
     } else {
-        countingNonExperiencedPlayer += 1
-        storingNonExperiencedPlayers.append(nameRecord[index])
+        nonExperiencedPlayers.append(player)
     }
+    
 }
 
-// function of average of team's heights
 
-func returningAverageHeightOfTeam(nameOfTeam: [String])-> Float{
-    var heightOfIndividual = [Int]()
-    
-    for index in 0..<nameOfTeam.count{
-        var matchingValues = nameOfTeam[index]// not sure why i have to change this to 'let', consider the value will change. Is it because func type?
-        
-        for index2 in 0..<nameRecord.count{
-            if matchingValues == nameRecord[index2]{
-                heightOfIndividual.append(heightRecord[index2])
-            }
-            
-        }// end of for level 2
-        
-        
-    }// end of for level 1
-    //averaging
-    var accumulatingValues : Float = 0.0
-    for index3 in 0..<heightOfIndividual.count{
-        
-        accumulatingValues = accumulatingValues + Float(heightOfIndividual[index3])
+
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+// creating a sort of closure type in form of function
+//for the purpose of sortInPlace method.
+////////////////////////////////////////////////////////
+func returningAverageHeightOfTeam(nameOfTeam: [[String:Any]])-> Float{
+    var totalHeight = 0
+    for height in nameOfTeam {
+         totalHeight += height["heightInInches"] as! Int
     }
+    return Float(totalHeight) / Float(nameOfTeam.count)
+   
+}
+
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+// creating a sort of closure type in form of function 
+//for the purpose of sortInPlace method.
+////////////////////////////////////////////////////////
+
+func closureForSortingBigToSmall(firstPlayer: [String:Any], secondPlayer: [String:Any])-> Bool{
+    let one = firstPlayer["heightInInches"] as! Int
+    let two = secondPlayer["heightInInches"] as! Int
     
-    return accumulatingValues / Float(heightOfIndividual.count)
-}// end of function
+    return one > two
+}
 
-
-// Defining variables of teams, number of team and constant ot Threshold
-var teamDragon = [String]()
-var teamSharks = [String]()
-var teamRaptors = [String]()
-let numberOfTeam = 3 // this is an input
-let thresholdOfHeight: Float = 1.5
-var pseudoStoringExperiencedPlayers = storingExperiencedPlayers
-var pseudoStoringNonExperiencedPlayers = storingNonExperiencedPlayers
-
-//creating a divisor so that the division will be evenly distributed
-let divisorOfExperiencedPlayers = countingExperiencedPlayer/numberOfTeam
-let divisorOfNonExperiencedPlayers = countingNonExperiencedPlayer/numberOfTeam
-let maximumPlayerPerTeam = nameRecord.count / numberOfTeam
-
-//initializing the threshold logic variables, initializing them higher then the threshold
-var differenceAverageHeighetDragonAndSharks: Float = thresholdOfHeight + 1
-var differenceAverageHeighetDragonAndRaptors: Float = thresholdOfHeight + 1
-var differenceAverageHeighetSharksAndRaptors: Float = thresholdOfHeight + 1
-
-if divisorOfExperiencedPlayers == 0{ print("The number of experienced players is not divisible by the number of team which is \(numberOfTeam)" + "/n Consider to add experienced players a multiple of \(numberOfTeam)")}
-else {
- 
-     // creating difference average values of the function
-     //starting to make it higher than the threshold first until it is violated (i.e., to make it lower than the threshold)
-     
-    while ((differenceAverageHeighetDragonAndSharks > thresholdOfHeight) || (differenceAverageHeighetDragonAndRaptors > thresholdOfHeight) || (differenceAverageHeighetSharksAndRaptors > thresholdOfHeight)){
-        /// putting the experienced players randomly
-        
-        while pseudoStoringExperiencedPlayers.count != 0 {
-            var pickingThePlayerFromRecord = pseudoStoringExperiencedPlayers[0]//picking always the first index
-            
-            var countingRandomPick = Int(arc4random() % uint(numberOfTeam) + 1)
-            
-            if ((countingRandomPick == 1) && (teamDragon.count < divisorOfExperiencedPlayers) ){
-                teamDragon.append(pickingThePlayerFromRecord)//deleting always the first index after restoring it
-                pseudoStoringExperiencedPlayers.removeAtIndex(0)
-            }
-            else if  ((countingRandomPick == 2 ) && (teamSharks.count < divisorOfExperiencedPlayers)) {
-                teamSharks.append(pickingThePlayerFromRecord)//deleting always the first index after restoring it
-                pseudoStoringExperiencedPlayers.removeAtIndex(0)
-            }
-            else if ((countingRandomPick == 3) && (teamRaptors
-                .count < divisorOfExperiencedPlayers)){
-                teamRaptors.append(pickingThePlayerFromRecord)//deleting always the first index after restoring it
-                pseudoStoringExperiencedPlayers.removeAtIndex(0)
-            }
-            
-        }// end of putting the experienced players randomly
-        
-        
-        // assigning nonExperienced Players
-         while pseudoStoringNonExperiencedPlayers.count != 0 {
-            
-            var pickingThePlayerFromRecord = pseudoStoringNonExperiencedPlayers[0]
-            
-            var countingRandomPick = Int(arc4random() % uint(numberOfTeam) + 1)
-            
-            if((countingRandomPick == 1) && (teamDragon.count < maximumPlayerPerTeam)){
-                teamDragon.append(pickingThePlayerFromRecord)
-                pseudoStoringNonExperiencedPlayers.removeAtIndex(0)
-            }else if((countingRandomPick == 2) && (teamSharks.count < maximumPlayerPerTeam)){
-                teamSharks.append(pickingThePlayerFromRecord)
-                pseudoStoringNonExperiencedPlayers.removeAtIndex(0)
-            }else if((countingRandomPick == 3) && (teamRaptors.count < maximumPlayerPerTeam)){
-                teamRaptors.append(pickingThePlayerFromRecord)
-                pseudoStoringNonExperiencedPlayers.removeAtIndex(0)
-            }
-            
-        }
-        //redefining the logic of threshold here, so the violation of the threshold will result in removing the array's values
-        
-        differenceAverageHeighetDragonAndSharks = (abs((returningAverageHeightOfTeam(teamDragon) - returningAverageHeightOfTeam(teamSharks))))
-        differenceAverageHeighetDragonAndRaptors = abs(returningAverageHeightOfTeam(teamDragon) - returningAverageHeightOfTeam(teamRaptors))
-        differenceAverageHeighetSharksAndRaptors = abs(returningAverageHeightOfTeam(teamSharks) - returningAverageHeightOfTeam(teamRaptors))
-        
-        if ((differenceAverageHeighetDragonAndSharks > thresholdOfHeight) || (differenceAverageHeighetDragonAndRaptors > thresholdOfHeight) || (differenceAverageHeighetSharksAndRaptors > thresholdOfHeight)){
-            // if the threshold is not satisfied, restart the collection from square one again
-            pseudoStoringExperiencedPlayers = storingExperiencedPlayers
-            pseudoStoringNonExperiencedPlayers = storingNonExperiencedPlayers
-            //removing the team
-            teamDragon.removeAll()
-            teamSharks.removeAll()
-            teamRaptors.removeAll()
-        }
-        
-        }// end of threshold logic
+func closureForSortingSmallToBig(firstPlayer: [String:Any], secondPlayer: [String:Any])-> Bool{
+    let one = firstPlayer["heightInInches"] as! Int
+    let two = secondPlayer["heightInInches"] as! Int
     
-    // continue the loop until satisfies the condition
-   }
+    return one < two
+}
 
-//checking the array
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+//Sorting the experienced player and inexperienced players
+////////////////////////////////////////////////////////
 
-teamDragon.count
-teamDragon
-teamRaptors.count
-teamRaptors
-teamSharks.count
-teamSharks
 
-//checking the height's difference
-differenceAverageHeighetDragonAndSharks
-differenceAverageHeighetDragonAndRaptors
-differenceAverageHeighetSharksAndRaptors
+    //this is actually from the feedback from first submission,where the reviewer says that i should "sort first the collection of experienced in one direction and the experienced to other direction."
+    // I think this is based on Ranking statistics maybe,but i'm not sure. By doing this, the statistics of the subsets is actually the same with the average of the whole set.
+    //damn clever!
 
-// function that returns the guardian, copy-pasted from func returningAverageHeightOfTeam()
+experiencedPlayers.sortInPlace(closureForSortingBigToSmall)
 
-func returningGuardianOfTeam(nameOfTeam: [String])-> [String]{
-    var guardianNameOfIndividual = [String]()
+nonExperiencedPlayers.sortInPlace(closureForSortingSmallToBig)
+
+
+// Assigning experienced players and inexperience Players to the team
+
+//experienced:
+var pseudoStoringExperiencedPlayers = experiencedPlayers
+var counter1 = true
+var counter2 = true
+var counter3 = true
+while  pseudoStoringExperiencedPlayers.count != 0 {
+    var assigningPlayer = pseudoStoringExperiencedPlayers[0]
     
-    for index in 0..<nameOfTeam.count{
-        var matchingValues = nameOfTeam[index]// not sure why i have to change this to 'let', consider the value will change. Is it because func type?
-        for index2 in 0..<guardianNameRecord.count{
-            if matchingValues == nameRecord[index2]{
-                guardianNameOfIndividual.append(guardianNameRecord[index2])
-            }
-            
-        }// end of for level 2
-        
-        
-    }// end of for level 1
-    
-    return guardianNameOfIndividual
-}// end of function
-
-// making dictionary to ease the loop for the letter to the guardian
-
-var dictionaryForTeam  = [0: teamDragon,1:teamSharks,2:teamRaptors]
-
-for index in 0..<numberOfTeam{
-    var temporaryIndividualName = dictionaryForTeam[index]!
-    // sorry for this, i am aware of the Optional type (to a very minimum extent!), although it hasn't been covered by the lecture so far. 
-    // so i have to unwrap it for now.
-    var temporaryGuardianName = returningGuardianOfTeam(temporaryIndividualName)
-    
-    var teamPracticeDatesLiteral = ""
-    var nameTeamLiteral = ""
-    var messageBody : String = ""
-    switch index {
-    case 0 : teamPracticeDatesLiteral = "March 17, 1pm"
-                nameTeamLiteral = "Team Dragon"
-    case 1 : teamPracticeDatesLiteral = "March 17, 3pm"
-                nameTeamLiteral = "Team Sharks"
-    case 2 :teamPracticeDatesLiteral = "March 18, 1pm"
-                nameTeamLiteral = "Team Raptors"
-    default : "NOT AVAILABLE"
-        
+    if (counter1){
+        teamDragons.append(assigningPlayer)
+        pseudoStoringExperiencedPlayers.removeAtIndex(0)
+        counter1 = false
+        counter2 = true
+        counter3 = false
+    } else if (counter2 ){
+        teamRaptors.append(assigningPlayer)
+        pseudoStoringExperiencedPlayers.removeAtIndex(0)
+        counter1 = false
+        counter2 = false
+        counter3 = true
+    } else if (counter3){
+        teamSharks.append(assigningPlayer)
+        pseudoStoringExperiencedPlayers.removeAtIndex(0)
+        counter1 = true
+        counter2 = false
+        counter3 = false
     }
-    for id in 0..<temporaryGuardianName.count{
-        messageBody = "Dear \(temporaryGuardianName[id]).\n" +
-            " \t\(temporaryIndividualName[id]) is assigned for \(nameTeamLiteral) for the soccer game. This team has to meet up at \(teamPracticeDatesLiteral). We are expecting \(temporaryIndividualName[id]) to be on time for this first team practice, so don't forget to remind your child! Looking forward to seeing \(temporaryIndividualName[id]) \n Thank you."
-    }
+}
+// nonExperienced:
+var pseudoStoringNonExperiencedPlayers = nonExperiencedPlayers
+var counter4 = true
+var counter5 = true
+var counter6 = true
+while  pseudoStoringNonExperiencedPlayers.count != 0 {
+    var assigningPlayer = pseudoStoringNonExperiencedPlayers[0]
     
+    if (counter4){
+        teamDragons.append(assigningPlayer)
+        pseudoStoringNonExperiencedPlayers.removeAtIndex(0)
+        counter4 = false
+        counter5 = true
+        counter6 = false
+    } else if (counter5 ){
+        teamRaptors.append(assigningPlayer)
+        pseudoStoringNonExperiencedPlayers.removeAtIndex(0)
+        counter4 = false
+        counter5 = false
+        counter6 = true
+    } else if (counter6){
+        teamSharks.append(assigningPlayer)
+        pseudoStoringNonExperiencedPlayers.removeAtIndex(0)
+        counter4 = true
+        counter5 = false
+        counter6 = false
+    }
+}
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+//Printing the Letter///////////////////////////////////
+////////////////////////////////////////////////////////
+let theWholeTeams = [teamDragons, teamSharks, teamRaptors]
+let teamNameLiteral = ["Team Dragons","Team Sharks","Team Raptors"]
+let teamPracticeDatesLiteral=["March 17, 1pm","March 17, 3pm","March 18, 1pm"]
+
+for player in 0..<theWholeTeams.count {
+    var extractingPlayer = theWholeTeams[player]
+    for teamName in extractingPlayer{
+        var messageBody = "Dear \(teamName["guardianNames"] as! String).\n" +
+            " \t\(teamName["playerName"]as! String) is assigned for \(teamNameLiteral[player]) for the soccer game. This team has to meet up on \(teamPracticeDatesLiteral[player]). We are expecting \(teamName["playerName"] as! String) to be on time for this first team practice, so don't forget to remind your child! Looking forward to seeing \(teamName["playerName"] as! String) \n Thank you."
+        print(messageBody)
+    }
 }
