@@ -24,10 +24,12 @@ let player15: [String: Any] = ["playerName":"Arnold Willis","heightInInches":43,
 let player16: [String: Any] = ["playerName":"Phillip Helm","heightInInches":44,"hasPlayedBefore":true,"guardianNames":"Thomas Helm and Eva Jones"]
 let player17: [String: Any] = ["playerName":"Les Clay","heightInInches":42,"hasPlayedBefore":true,"guardianNames":"Wynonna Brown"]
 let player18: [String: Any] = ["playerName":"Herschel Krustofski","heightInInches":45,"hasPlayedBefore":true,"guardianNames":"Hyman and Rachel Krustofski"]
-
+// and entire league array of dictionary
 var theLeague:[[String:Any]] = [player1,player2,player3,player4,player5,player6,player7,player8,player9,player10,player11,player12,player13,player14,player15,player16,player17,player18]
 
-// Defining the variables and constants
+////////////////////////////////////////////////////////
+// Now, we create array of Dictionary for each three teams
+////////////////////////////////////////////////////////
 var teamDragons = [[String:Any]]()
 var teamSharks = [[String:Any]]()
 var teamRaptors = [[String:Any]]()
@@ -97,7 +99,7 @@ func closureForSortingSmallToBig(firstPlayer: [String:Any], secondPlayer: [Strin
 
 
     //this is actually from the feedback from first submission,where the reviewer says that i should "sort first the collection of experienced in one direction and the experienced to other direction."
-    // I think this is based on Ranking statistics maybe,but i'm not sure. By doing this, the statistics of the subsets is actually the same with the average of the whole set.
+    // I think this is based on ordered statistics maybe,but i'm not sure. By doing this, the statistics of the subsets is actually the same with the average of the whole set.
     //damn clever!
 
 experiencedPlayers.sortInPlace(closureForSortingBigToSmall)
@@ -176,6 +178,7 @@ for player in 0..<theWholeTeams.count {
     for teamName in extractingPlayer{
         var messageBody = "Dear \(teamName["guardianNames"] as! String).\n" +
             " \t\(teamName["playerName"]as! String) is assigned for \(teamNameLiteral[player]) for the soccer game. This team has to meet up on \(teamPracticeDatesLiteral[player]). We are expecting \(teamName["playerName"] as! String) to be on time for this first team practice, so don't forget to remind your child! Looking forward to seeing \(teamName["playerName"] as! String) \n Thank you."
+        //Print the message. This was missing in the previous submission. Sorry!!!
         print(messageBody)
     }
 }
